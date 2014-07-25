@@ -1,0 +1,27 @@
+<h1>Listing open_source_projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Open source</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @open_source_projects.each do |open_source_project| %>
+      <tr>
+        <td><%= open_source_project.url %></td>
+        <td><%= open_source_project.open_source %></td>
+        <td><%= link_to 'Show', open_source_project %></td>
+        <td><%= link_to 'Edit', edit_open_source_project_path(open_source_project) %></td>
+        <td><%= link_to 'Destroy', open_source_project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Open source project', new_open_source_project_path %>

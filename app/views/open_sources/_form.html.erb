@@ -1,0 +1,21 @@
+<%= form_for(@open_source) do |f| %>
+  <% if @open_source.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@open_source.errors.count, "error") %> prohibited this open_source from being saved:</h2>
+
+      <ul>
+      <% @open_source.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cv_id %><br>
+    <%= f.text_field :cv_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

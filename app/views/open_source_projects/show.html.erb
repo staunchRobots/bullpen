@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @open_source_project.url %>
+</p>
+
+<p>
+  <strong>Open source:</strong>
+  <%= @open_source_project.open_source %>
+</p>
+
+<%= link_to 'Edit', edit_open_source_project_path(@open_source_project) %> |
+<%= link_to 'Back', open_source_projects_path %>
