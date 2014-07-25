@@ -1,29 +1,88 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @cv.name %>
-</p>
+<section class="cv">
+  <div class="row">
+    <div class="col-xs-8 leftPart">
+      <div class="row name">
+        <div><%= @cv.name %></div>
+      </div>
+      <div class="row profile">
+        <h1 class="sectionTitle"><span class="glyphicon glyphicon-user"></span> Profile</h1>
+        <div class="sectionContent"><%= @cv.profile %></div>
+      </div>
+      <div class="row projects">
+        <h1 class="sectionTitle"><span class="glyphicon glyphicon-book"></span> Notable Projects</h1>
+        <div ng-repeat="project in candidate.projects" class="sectionContent">
+          <div class="projectName">{{project.name}}</div>
+          <div class="projectUrl">{{project.url}}</div>
+          <div class="projectDescription">{{project.description}}</div>
+          <ul ng-repeat="interesting in project.interesting">
+            <li class="projectInteresting">{{interesting}}</li>
+          </ul>
+          <div class="projectTech">{{project.tech}}</div>
+        </div>
+      </div>
+      <div class="row open-source">
+        <h1 class="sectionTitle"><span class="glyphicon glyphicon-cloud"></span> Open Source</h1>
+        <div class="sectionContent">
+          <p ng-repeat="project in candidate.opensource.projects">{{project}}</p>
+          <p ng-repeat="contribution in candidate.opensource.contributions">{{contribution}}</p>
+        </div>
+      </div>
+      <div class="row practices">
+        <h1 class="sectionTitle"><span class="glyphicon glyphicon-ok"></span> Good Practices</h1>
+        <div class="sectionContent">
+          <p ng-repeat="practice in candidate.practices">{{practice.name}}: {{practice.description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4 rightPart">
+      <div class="row picture"></div>
+      <div class="row title">
+        <p><%= @cv.title %></p>
+        <p>{{candidate.titleb}}</p>
+      </div>
+      <div class="row skills">
+        <span ng-repeat="skill in candidate.skills">{{skill.name}}: {{skill.percentage}} </span>
+      </div>
+      <div class="row experience">
+        <% @cv.experiences.each do |experience| %>
+          <p>
+            <%= experience.name %>: <%= experience.years %>
+            <%= link_to 'Show', [experience.cv, experience] %>
+            <%= link_to 'Edit', edit_cv_experience_path(experience.cv, experience) %>
+            <%= link_to 'Destroy', [experience.cv, experience], method: :delete, data: { confirm: 'Are you sure?' }%>
+          </p>
+        <% end %>
+        <a id="add_experience" onclick="$('#add_experience_form').show();">Add experience</a>
+        <div id="add_experience_form" style="display:none"><%= render 'experiences/form' %></div>
+      </div>
 
-<p>
-  <strong>Profile:</strong>
-  <%= @cv.profile %>
-</p>
+      <div class="row toolbox">
+        <h1><span class="glyphicon glyphicon-wrench"></span> Toolbox</h1>
+        {{candidate.toolbox}}
+      </div>
+      <div class="row education">
+        <h1><span class="glyphicon glyphicon-bookmark"></span> Learning</h1>
+        <p ng-repeat="education in candidate.educations">{{education.title}}: {{education.institution}}</p>
+        <div class="stackoverflow">
+          <p>Reputation: <%= @cv.stackoverflow_reputation %></p>
+          <p>Tags: {{candidate.stackoverflow.reputation}}</p>
+        </div>
+        <div>Blog: <%= @cv.blog %></div>
+      </div>
+      <div class="row languages">
+        <h1><span class="glyphicon glyphicon-comment"></span> Languages</h1>
+        <p ng-repeat="language in candidate.languages">{{language.name}}: {{language.proeficiency}}</p>
+      </div>
+      <div class="row logo">
+        <%= image_tag "logo.png" %>
+      </div>
+      
+    </div>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @cv.title %>
-</p>
-
-<p>
-  <strong>Stackoverflow reputation:</strong>
-  <%= @cv.stackoverflow_reputation %>
-</p>
-
-<p>
-  <strong>Blog:</strong>
-  <%= @cv.blog %>
-</p>
+</section>
 
 <%= link_to 'Edit', edit_cv_path(@cv) %> |
 <%= link_to 'Back', cvs_path %>

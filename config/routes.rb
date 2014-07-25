@@ -1,24 +1,19 @@
 Rails.application.routes.draw do
-  resources :languages
+  resources :cvs do
+    resources :languages
+    resources :open_sources do
+      resources :open_source_projects
+    end
+    resources :practices
+    resources :projects do
+      resources :project_interest_points
+    end
+    resources :educations
+    resources :skills
+    resources :experiences
+  end
 
-  resources :open_source_projects
-
-  resources :open_sources
-
-  resources :practices
-
-  resources :project_interest_points
-
-  resources :projects
-
-  resources :educations
-
-  resources :skills
-
-  resources :experiences
-
-  resources :cvs
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

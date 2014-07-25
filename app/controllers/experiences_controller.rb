@@ -1,5 +1,7 @@
 class ExperiencesController < ApplicationController
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
+  before_action :set_cv, only: [:new, :create, :edit, :show]
+
 
   # GET /experiences
   # GET /experiences.json
@@ -25,10 +27,11 @@ class ExperiencesController < ApplicationController
   # POST /experiences.json
   def create
     @experience = Experience.new(experience_params)
+    @experience.cv_id = @cv.id
 
     respond_to do |format|
       if @experience.save
-        format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
+        format.html { redirect_to @cv, notice: 'Experience was successfully created.' }
         format.json { render :show, status: :created, location: @experience }
       else
         format.html { render :new }
@@ -56,7 +59,7 @@ class ExperiencesController < ApplicationController
   def destroy
     @experience.destroy
     respond_to do |format|
-      format.html { redirect_to experiences_url, notice: 'Experience was successfully destroyed.' }
+      format.html { redirect_to cv_experiences_url, notice: 'Experience was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,5 +73,9 @@ class ExperiencesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
       params.require(:experience).permit(:name, :years, :cv_id)
+    end
+
+    def set_cv
+      @cv = Cv.find(params[:cv_id])
     end
 end
