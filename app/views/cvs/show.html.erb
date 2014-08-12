@@ -12,15 +12,17 @@
       </div>
       <div class="row projects">
         <h1 class="sectionTitle"><span class="glyphicon glyphicon-book"></span> Notable Projects</h1>
-        <div ng-repeat="project in candidate.projects" class="sectionContent">
-          <div class="projectName">{{project.name}}</div>
-          <div class="projectUrl">{{project.url}}</div>
-          <div class="projectDescription">{{project.description}}</div>
-          <ul ng-repeat="interesting in project.interesting">
-            <li class="projectInteresting">{{interesting}}</li>
-          </ul>
-          <div class="projectTech">{{project.tech}}</div>
-        </div>
+        <% @cv.projects.each do |project| %>
+          <div class="sectionContent">
+            <div class="projectName"><%= project.name %></div>
+            <div class="projectUrl"><%= project.url %></div>
+            <div class="projectDescription"><%= project.description %></div>
+            <ul ng-repeat="interesting in project.interesting">
+              <li class="projectInteresting">{{interesting}}</li>
+            </ul>
+            <div class="projectTech">{{project.tech}}</div>
+          </div>
+        <% end %>
       </div>
       <div class="row open-source">
         <h1 class="sectionTitle"><span class="glyphicon glyphicon-cloud"></span> Open Source</h1>
@@ -43,19 +45,16 @@
         <p>{{candidate.titleb}}</p>
       </div>
       <div class="row skills">
-        <span ng-repeat="skill in candidate.skills">{{skill.name}}: {{skill.percentage}} </span>
+        <% @cv.skills.each do |skill| %>
+          <span><%= skill.name %>: %= skill.percentage %></span>
+        <% end %>
       </div>
       <div class="row experience">
         <% @cv.experiences.each do |experience| %>
           <p>
             <%= experience.name %>: <%= experience.years %>
-            <%= link_to 'Show', [experience.cv, experience] %>
-            <%= link_to 'Edit', edit_cv_experience_path(experience.cv, experience) %>
-            <%= link_to 'Destroy', [experience.cv, experience], method: :delete, data: { confirm: 'Are you sure?' }%>
           </p>
         <% end %>
-        <a id="add_experience" onclick="$('#add_experience_form').show();">Add experience</a>
-        <div id="add_experience_form" style="display:none"><%= render 'experiences/form' %></div>
       </div>
 
       <div class="row toolbox">

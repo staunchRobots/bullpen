@@ -2,5 +2,48 @@
 
 <%= render 'form' %>
 
+<div class="row experience">
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Years</th>
+    </tr>
+  <% @cv.experiences.each do |experience| %>
+    <tr>
+      <td><%= experience.name %></td>
+      <td><%= experience.years %></td>
+      <td>
+        <%= link_to 'Show', [experience.cv, experience] %>
+        <%= link_to 'Edit', edit_cv_experience_path(experience.cv, experience) %>
+        <%= link_to 'Destroy', [experience.cv, experience], method: :delete, data: { confirm: 'Are you sure?' }%>
+      </td>
+    </tr>
+  <% end %>
+  <a id="add_experience" onclick="$('#add_experience_form').show();">Add experience</a>
+  <div id="add_experience_form" style="display:none"><%= render 'experiences/form' %></div>
+</div>
+
+<div class="row experience">
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Percentage</th>
+    </tr>
+    <% @cv.skills.each do |skill| %>
+      <tr>
+        <td><%= skill.name %></td>
+        <td><%= skill.percentage %>%</td>
+        <td>
+          <%= link_to 'Show', [skill.cv, skill] %>
+          <%= link_to 'Edit', edit_cv_skill_path(skill.cv, skill) %>
+          <%= link_to 'Destroy', [skill.cv, skill], method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <a id="add_skill" onclick="$('#add_skill_form').show();">Add skill</a>
+  <div id="add_skill_form" style="display:none"><%= render 'skills/form' %></div>
+</div>
+
 <%= link_to 'Show', @cv %> |
 <%= link_to 'Back', cvs_path %>

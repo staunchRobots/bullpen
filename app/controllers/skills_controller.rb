@@ -25,10 +25,11 @@ class SkillsController < ApplicationController
   # POST /skills.json
   def create
     @skill = Skill.new(skill_params)
-
+    @experience.cv_id = @cv.id
+    
     respond_to do |format|
       if @skill.save
-        format.html { redirect_to @skill, notice: 'Skill was successfully created.' }
+        format.html { redirect_to @cv, notice: 'Skill was successfully created.' }
         format.json { render :show, status: :created, location: @skill }
       else
         format.html { render :new }

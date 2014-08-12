@@ -10,7 +10,7 @@ class CvsController < ApplicationController
   # GET /cvs/1
   # GET /cvs/1.json
   def show
-    @experience = Experience.new
+    
   end
 
   # GET /cvs/new
@@ -20,6 +20,8 @@ class CvsController < ApplicationController
 
   # GET /cvs/1/edit
   def edit
+    @experience = Experience.new
+    @skill = Skill.new
   end
 
   # POST /cvs

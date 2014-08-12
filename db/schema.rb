@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725200957) do
+ActiveRecord::Schema.define(version: 20140728154807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cvs", force: true do |t|
     t.string   "name"
-    t.string   "profile"
+    t.text     "profile"
     t.string   "title"
     t.integer  "stackoverflow_reputation"
     t.string   "blog"

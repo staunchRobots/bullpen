@@ -15,10 +15,6 @@
   <%= @project.description %>
 </p>
 
-<p>
-  <strong>Cv:</strong>
-  <%= @project.cv %>
-</p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Edit', edit_cv_project_path(@project.cv, @project) %> |
+<%= link_to 'Back', cv_path(@cv) %>
